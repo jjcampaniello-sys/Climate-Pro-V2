@@ -1,3 +1,7 @@
+let browserLang = navigator.language || "fr";
+
+console.log("Langue navigateur :", browserLang);
+
 let memory = JSON.parse(localStorage.getItem("memory")) || [];
 let archive = JSON.parse(localStorage.getItem("archive")) || {
   total: 0,
@@ -196,10 +200,14 @@ async function suggestCities() {
   data.results.forEach(city => {
     let div = document.createElement("div");
     div.className = "suggestion";
-    div.innerText = city.name;
-
+    //div.innerText = city.name;
+div.innerText =
+  `${city.name}, ${city.country || ""}`;
+    
     div.onclick = () => {
-      document.getElementById("search").value = city.name;
+    //  document.getElementById("search").value = city.name;
+      document.getElementById("search").value =
+  `${city.name}, ${city.country || ""}`;
       box.innerHTML = "";
       load(city.latitude, city.longitude);
     };
